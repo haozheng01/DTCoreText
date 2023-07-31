@@ -157,6 +157,9 @@ static NSCache *imageCache = nil;
 				_contentURL = nil;
 			}
 		}
+		else if ([baseURL isFileURL]) {
+			contentURL = [NSURL fileURLWithPath:src relativeToURL:baseURL];
+		}
 		else // normal URL
 		{
 			contentURL = [NSURL URLWithString:src];
