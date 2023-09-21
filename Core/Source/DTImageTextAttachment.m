@@ -158,7 +158,11 @@ static NSCache *imageCache = nil;
 			}
 		}
 		else if ([baseURL isFileURL]) {
-			contentURL = [NSURL fileURLWithPath:src relativeToURL:baseURL];
+			NSString *tmpSrc = src;
+			if ([src containsString:@"../"]) {
+				tmpSrc = [src stringByReplacingOccurrencesOfString:@"../" withString:@""];
+			}
+			contentURL = [NSURL fileURLWithPath:tmpSrc relativeToURL:baseURL];
 		}
 		else // normal URL
 		{
